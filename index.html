@@ -1,0 +1,122 @@
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestro Jardín Bonito 🌸🐝</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;cursor:none;}
+  body{
+    font-family:'Quicksand',sans-serif;
+    background: linear-gradient(180deg,#fff9e6 0%,#ffefd6 30%,#e8f8e8 100%);
+    overflow-x:hidden;
+  }
+  h1{font-family:'Pacifico',cursive; text-align:center; font-size:3rem; margin:30px 0 10px; color:#5a3e1b;}
+  .nombres{
+    display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:20px;
+  }
+  .nombres span{
+    background:white; padding:10px 20px; border-radius:30px; box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    font-family:'Pacifico',cursive; font-size:1.3rem; color:#d47a9e;
+  }
+  .grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px; padding:20px; max-width:1200px; margin:auto;
+  }
+  .foto{
+    position:relative; height:250px; border-radius:20px; overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,0.12); background:white;
+    transition:transform 0.3s;
+  }
+  .foto:hover{transform:scale(1.05) rotate(1deg);}
+  .foto img{width:100%; height:100%; object-fit:cover;}
+  .foto::after{
+    content:'🌸'; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(0);
+    font-size:80px; transition:0.3s; opacity:0;
+  }
+  .foto:hover::after{transform:translate(-50%,-50%) scale(1); opacity:0.9;}
+  .foto:nth-child(even):hover::after{content:'🐝';}
+  .foto:nth-child(3n):hover::after{content:'🌼';}
+  .media-box{
+    max-width:800px; margin:30px auto; background:white; padding:20px; border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.1); text-align:center;
+  }
+  video,audio{width:100%; border-radius:15px; margin-top:10px;}
+  
+  /* Puntero personalizado */
+  #cursor{
+    position:fixed; top:0; left:0; pointer-events:none; font-size:28px; z-index:9999;
+    transition:transform 0.1s;
+  }
+  .flotando{
+    position:fixed; pointer-events:none; animation:flotar 1.5s forwards; font-size:24px; z-index:9998;
+  }
+  @keyframes flotar{
+    0%{transform:translateY(0) scale(1); opacity:1;}
+    100%{transform:translateY(-150px) scale(1.5) rotate(20deg); opacity:0;}
+  }
+</style>
+</head>
+<body>
+
+<h1>🌸 Nuestro Jardincito 🐝</h1>
+<div class="nombres">
+  <span>Juan Manuel 🌼</span>
+  <span>Carlos 🌸</span>
+  <span>Javier 🐝</span>
+  <span>Jade 💮</span>
+</div>
+
+<div class="grid">
+  <div class="foto"><img src="foto1.img" alt="foto1"></div>
+  <div class="foto"><img src="foto2.jpg" alt="foto2"></div>
+  <div class="foto"><img src="foto3.jpg" alt="foto3"></div>
+  <div class="foto"><img src="IMG-20261027-WA0089.jpg" alt="foto4"></div>
+  <div class="foto"><img src="IMG-20261027-WA0088.jpg" alt="foto5"></div>
+  <div class="foto"><img src="IMG-20261027-WA0087.jpg" alt="foto6"></div>
+  <div class="foto"><img src="IMG-20261028-WA0000 (1).jpg" alt="foto7"></div>
+  <div class="foto"><img src="IMG-20261027-WA0086.jpg" alt="foto8"></div>
+  <div class="foto"><img src="IMG-20261027-WA0084.jpg" alt="foto9"></div>
+  <div class="foto"><img src="IMG-20261027-WA0085.jpg" alt="foto10"></div>
+  <div class="foto"><img src="IMG-20261027-WA0083.jpg" alt="foto11"></div>
+</div>
+
+<div class="media-box">
+  <h2>🎬 Nuestro Video</h2>
+  <video controls src="VID-20261028-WA0001(1).mp4"></video>
+</div>
+
+<div class="media-box">
+  <h2>🎙️ Nuestro Podcast</h2>
+  <audio controls src="https://www.w3schools.com/html/horse.mp3"></audio>
+</div>
+
+<div id="cursor">🐝</div>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const emojis = ['🐝','🌸','🌼','🦋','🌻'];
+  let idx=0;
+  document.addEventListener('mousemove', e=>{
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  setInterval(()=>{
+    idx=(idx+1)%emojis.length;
+    cursor.textContent=emojis[idx];
+  },800);
+
+  document.addEventListener('click', e=>{
+    for(let i=0;i<5;i++){
+      const f=document.createElement('div');
+      f.className='flotando';
+      f.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+      f.style.left=(e.clientX + (Math.random()-0.5)*100)+'px';
+      f.style.top=e.clientY+'px';
+      document.body.appendChild(f);
+      setTimeout(()=>f.remove(),1500);
+    }
+  });
+</script>
+</body>
+</html>
